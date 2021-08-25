@@ -1,8 +1,7 @@
 package com.gisaklc.workshopmongo.resource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gisaklc.workshopmongo.domain.User;
+import com.gisaklc.workshopmongo.dto.UserDto;
 import com.gisaklc.workshopmongo.service.UserService;
 
 @RestController
@@ -22,9 +22,11 @@ public class UserResource {
 
 	// @GetMapping
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<User>> findAll() {
+	public ResponseEntity<List<UserDto>> findAll() {
 		List<User> list = userService.findAll();
-		return ResponseEntity.ok().body(list);
+		//converte a lista de usuario em uma lista de DTO
+		List<UserDto> listDto = list.stream().map(user -> new UserDto(user)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 
 }
