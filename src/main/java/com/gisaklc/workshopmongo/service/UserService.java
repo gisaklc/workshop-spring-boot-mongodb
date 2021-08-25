@@ -33,6 +33,11 @@ public class UserService {
 
 	}
 
+	public void delete(String id) {
+		findById(id);//busca o objeto e dar erro se nao encontrar
+		userRepository.deleteById(id);
+	}
+
 	public User fromDto(UserDto objDto) {
 		return new User(objDto.getId(), objDto.getNome(), objDto.getEmail());
 	}

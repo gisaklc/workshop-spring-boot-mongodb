@@ -43,10 +43,16 @@ public class UserResource {
 	public ResponseEntity<UserDto> findById(@RequestBody UserDto objDto) {
 		User user = userService.fromDto(objDto);
 		user = userService.insert(user);
-		//pegar no HEADER o caminho do recurso criado
+		// pegar no HEADER o caminho do recurso criado
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
-		return ResponseEntity.created(uri).build();//retorna 201
+		return ResponseEntity.created(uri).build();// retorna 201
 	}
 
-	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		userService.delete(id);
+		return ResponseEntity.noContent().build();// codigo de qnd nao retorna nada
+
+	}
+
 }
