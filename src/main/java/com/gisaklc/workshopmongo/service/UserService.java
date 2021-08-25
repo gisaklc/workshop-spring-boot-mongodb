@@ -28,9 +28,13 @@ public class UserService {
 
 	}
 
-	public UserDto newUsuarioDto(User user) {
-		return new UserDto(user);
+	public User insert(User obj) {
+		return userRepository.insert(obj);
 
+	}
+
+	public User fromDto(UserDto objDto) {
+		return new User(objDto.getId(), objDto.getNome(), objDto.getEmail());
 	}
 
 }
