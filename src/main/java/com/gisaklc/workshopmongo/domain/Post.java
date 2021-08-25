@@ -1,12 +1,13 @@
 package com.gisaklc.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document //mapeamento da classe mongodb
-public class User implements Serializable {
+@Document // MongoDb
+public class Post implements Serializable {
 
 	/**
 	 * 
@@ -14,24 +15,21 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;
-	private String nome;
-	private String email;
+	private Date date;
+	private String title;
+	private String body;
+	private User autor;
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Post() {
 	}
 
-	public User(String id, String nome, String email) {
+	public Post(String id, Date date, String title, String body, User autor) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.email = email;
-	}
-	public User(String nome, String email) {
-		super();
-		this.nome = nome;
-		this.email = email;
+		this.date = date;
+		this.title = title;
+		this.body = body;
+		this.autor = autor;
 	}
 
 	public String getId() {
@@ -42,20 +40,36 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	public User getAutor() {
+		return autor;
+	}
+
+	public void setAutor(User autor) {
+		this.autor = autor;
 	}
 
 	@Override
@@ -74,7 +88,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Post other = (Post) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

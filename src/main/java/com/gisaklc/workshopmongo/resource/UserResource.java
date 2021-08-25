@@ -52,7 +52,14 @@ public class UserResource {
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		userService.delete(id);
 		return ResponseEntity.noContent().build();// codigo de qnd nao retorna nada
+	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody UserDto objDto, @PathVariable  String id) {
+		User obj = userService.fromDto(objDto);// convete o CategoriaDTO para Categoria
+		obj.setId(id);
+		obj = userService.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 
 }
