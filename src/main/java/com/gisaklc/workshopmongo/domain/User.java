@@ -19,7 +19,7 @@ public class User implements Serializable {
 	private String id;
 	private String nome;
 	private String email;
-	//dbref é para referenciar a collection 
+	//dbref é para referenciar a collection ;..çç
 	@DBRef(lazy=true)//o laze true carregar os posts somente se acessar explicitamente, ou seja
 	private List<Post> posts = new ArrayList<>();
 	
