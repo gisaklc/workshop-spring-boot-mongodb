@@ -1,5 +1,6 @@
 package com.gisaklc.workshopmongo.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,15 @@ public class PostService {
 
 	public List<Post> findByTitle(String text) {
 		return postRepository.searchTitle(text);
-	//	return postRepository.findByTitleContainingIgnoreCase(text);
+		// return postRepository.findByTitleContainingIgnoreCase(text);
 	}
-	
+
+	public List<Post> fullSearch(String text, Date min, Date max) {
+		//acrescentar + um dia na data maxima pq a data
+		//é armazena em millisegundos tem hora, minuto e segundo
+		max = new Date(max.getTime() + 24 * 60 * 60 * 1000);
+		return postRepository.fullSearch(text, min, max);
+
+	}
+
 }
